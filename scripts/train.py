@@ -27,7 +27,7 @@ from main.config.create_config import load_dict
 img_file = "img_train.txt"
 gt_file = "gt_train.txt"
 log_dir_name = './log'
-init_file = "imagenet.h5"
+init_file = "mobileNet_keypoints_init.h5"
 EPOCHS = 100
 STEPS = None
 OPTIMIZER = "default"
