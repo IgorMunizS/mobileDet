@@ -142,14 +142,7 @@ def train():
     if OPTIMIZER == "adam":
         opt = optimizers.Adam(lr=0.0001 * GPUS,  clipnorm=cfg.MAX_GRAD_NORM)
         cfg.LR= 0.0001 * GPUS
-    if OPTIMIZER == "rmsprop":
-        opt = optimizers.RMSprop(lr=0.001 * GPUS,  clipnorm=cfg.MAX_GRAD_NORM)
-        cfg.LR= 0.001 * GPUS
-
-    if OPTIMIZER == "adagrad":
-        opt = optimizers.Adagrad(lr=1.0 * GPUS,  clipnorm=cfg.MAX_GRAD_NORM)
-        cfg.LR = 1 * GPUS
-
+        print("Usando otimizador adam com LR 0.0001")
     #use default is nothing is given
     else:
 
