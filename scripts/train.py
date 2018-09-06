@@ -140,8 +140,8 @@ def train():
     #set optimizer
     #multiply by number of workers do adjust for increased batch size
     if OPTIMIZER == "adam":
-        opt = optimizers.Adam(lr=0.001 * GPUS,  clipnorm=cfg.MAX_GRAD_NORM)
-        cfg.LR= 0.001 * GPUS
+        opt = optimizers.Adam(lr=0.0001 * GPUS,  clipnorm=cfg.MAX_GRAD_NORM)
+        cfg.LR= 0.0001 * GPUS
     if OPTIMIZER == "rmsprop":
         opt = optimizers.RMSprop(lr=0.001 * GPUS,  clipnorm=cfg.MAX_GRAD_NORM)
         cfg.LR= 0.001 * GPUS
