@@ -27,7 +27,8 @@ from main.config.create_config import load_dict
 img_file = "img_train.txt"
 gt_file = "gt_train.txt"
 log_dir_name = './log'
-init_file = "mobileNet_keypoints_init.h5"
+init_file = "none"
+checkpoint_file = "mobile_check.h5"
 EPOCHS = 100
 STEPS = None
 OPTIMIZER = "default"
@@ -212,6 +213,9 @@ def train():
         
 
         """
+    if checkpoint_file != None:
+
+        squeeze.model.load_weights(checkpoint_file)
 
     #create train generator
     train_generator = generator_from_data_path(img_names, gt_names, config=cfg)
@@ -278,6 +282,7 @@ if __name__ == "__main__":
     parser.add_argument("--gpu",  help="which gpu to use. DEFAULT: 0")
     parser.add_argument("--gpus", type=int,  help="number of GPUS to use when using multi gpu support. Overwrites gpu flag. DEFAULT: 1")
     parser.add_argument("--init",  help="keras checkpoint to start training from. If argument is none, training starts from the beginnin. DEFAULT: init_weights.h5")
+    parser.add_argument("--checkpoint",  help="keras checkpoint to start training from. If argument is none, training starts from the beginnin. DEFAULT: init_weights.h5")
     parser.add_argument("--resume", type=bool, help="Resumes training and does not delete old dirs. DEFAULT: False")
     parser.add_argument("--reducelr", type=bool, help="Add ReduceLrOnPlateu callback to training. DEFAULT: True")
     parser.add_argument("--verbose", type=bool,  help="Prints additional information. DEFAULT: False")
@@ -303,6 +308,8 @@ if __name__ == "__main__":
         OPTIMIZER = args.optimizer.lower()
     if args.init is not None:
         init_file = args.init
+    if args.checkpoint is not None:
+        checkpoint_file = args.checkpoint
     if args.gpus is not None:
         GPUS= args.gpus
     if args.reducelr is not None:

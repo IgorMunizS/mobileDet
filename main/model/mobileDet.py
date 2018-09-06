@@ -74,7 +74,7 @@ class MobileDet():
         pred_padded = Lambda(self._pad)(pred_reshaped)
 
         model = Model(inputs=input_layer, outputs=pred_padded)
-
+        print(model.summary())
         return model
 
     def _conv_block(self,inputs, filters, alpha, kernel=(3, 3), strides=(1, 1)):
