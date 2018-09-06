@@ -6,7 +6,8 @@
 # Email: christopher@searchink.com
 
 
-from main.model.squeezeDet import  SqueezeDet
+from main.model.squeezeDet import SqueezeDet
+from main.model.mobileDet import MobileDet
 from main.model.dataGenerator import generator_from_data_path, visualization_generator_from_data_path
 import keras.backend as K
 from keras import optimizers
@@ -232,7 +233,7 @@ def eval():
 
 
     #instantiate model
-    squeeze = SqueezeDet(cfg)
+    squeeze = MobileDet(cfg)
 
     #dummy optimizer for compilation
     sgd = optimizers.SGD(lr=cfg.LEARNING_RATE, decay=0, momentum=cfg.MOMENTUM,
