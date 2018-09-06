@@ -33,7 +33,7 @@ class MobileDet():
         self.model = self._create_model()
 
     # creates keras model
-    def _create_model(self, alpha=0.75, depth_multiplier=1.0):
+    def _create_model(self, alpha=0.75, depth_multiplier=1):
         """
         #builds the Keras model from config
         #return: mobileDet in Keras
