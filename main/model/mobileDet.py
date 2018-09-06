@@ -41,7 +41,7 @@ class MobileDet():
         """
         input_layer = Input(shape=(self.config.IMAGE_HEIGHT, self.config.IMAGE_WIDTH, self.config.N_CHANNELS),name="input")
 
-        x = self._conv_block(input_layer, 32, alpha, strides=(1, 1))
+        x = self._conv_block(input_layer, 32, alpha, strides=(2, 2))
         x = self._depthwise_conv_block(x, 64, alpha, depth_multiplier, block_id=1)
 
         x = self._depthwise_conv_block(x, 128, alpha, depth_multiplier, strides=(2, 2), block_id=2)
