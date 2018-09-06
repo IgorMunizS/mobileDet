@@ -77,7 +77,7 @@ class MobileDet():
 
         return model
 
-    def _conv_block(inputs, filters, alpha, kernel=(3, 3), strides=(1, 1)):
+    def _conv_block(self,inputs, filters, alpha, kernel=(3, 3), strides=(1, 1)):
 
         channel_axis = -1
         filters = int(filters * alpha)
@@ -90,7 +90,7 @@ class MobileDet():
         x = layers.BatchNormalization(axis=channel_axis, name='conv1_bn')(x)
         return layers.ReLU(6., name='conv1_relu')(x)
 
-    def _depthwise_conv_block(inputs, pointwise_conv_filters, alpha,
+    def _depthwise_conv_block(self,inputs, pointwise_conv_filters, alpha,
                               depth_multiplier=1, strides=(1, 1), block_id=1):
 
         channel_axis = -1
