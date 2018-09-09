@@ -30,7 +30,7 @@ img_file = "img_train.txt"
 gt_file = "gt_train.txt"
 log_dir_name = './log'
 init_file = "none"
-checkpoint_file = "mobile_check.h5"
+checkpoint_file = "none"
 EPOCHS = 100
 STEPS = None
 OPTIMIZER = "default"
@@ -212,7 +212,7 @@ def train():
         
 
         """
-    if checkpoint_file != None:
+    if checkpoint_file != "none":
 
         squeeze.model.load_weights(checkpoint_file)
 
