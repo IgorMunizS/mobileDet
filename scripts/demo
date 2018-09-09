@@ -1,0 +1,86 @@
+# Author: Bichen Wu (bichen@berkeley.edu) 08/25/2016
+
+"""SqueezeDet Demo.
+In image detection mode, for a given image, detect objects and draw bounding
+boxes around them. In video detection mode, perform real-time detection on the
+video stream.
+"""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import cv2
+import time
+import sys
+import os
+import glob
+import argparse
+
+import numpy as np
+import tensorflow as tf
+
+from config import *
+from train import _draw_box
+from nets import *
+
+from main.model.mobileDet import MobileDet
+
+
+def image_demo(model, weight_path, image_path):
+    """Detect image."""
+
+
+    im = cv2.imread(f)
+    im = im.astype(np.float32, copy=False)
+    im = cv2.resize(im, (mc.IMAGE_WIDTH, mc.IMAGE_HEIGHT))
+    input_image = im - mc.BGR_MEANS
+
+    # Detect
+    det_boxes, det_probs, det_class = sess.run(
+        [model.det_boxes, model.det_probs, model.det_class],
+        feed_dict={model.image_input: [input_image]})
+
+    # Filter
+    final_boxes, final_probs, final_class = model.filter_prediction(
+        det_boxes[0], det_probs[0], det_class[0])
+
+    keep_idx = [idx for idx in range(len(final_probs)) \
+                if final_probs[idx] > mc.PLOT_PROB_THRESH]
+    final_boxes = [final_boxes[idx] for idx in keep_idx]
+    final_probs = [final_probs[idx] for idx in keep_idx]
+    final_class = [final_class[idx] for idx in keep_idx]
+
+    # TODO(bichen): move this color dict to configuration file
+    cls2clr = {
+        'car': (255, 191, 0),
+        'cyclist': (0, 191, 255),
+        'pedestrian': (255, 0, 191)
+    }
+
+    # Draw boxes
+    _draw_box(
+        im, final_boxes,
+        [mc.CLASS_NAMES[idx] + ': (%.2f)' % prob \
+         for idx, prob in zip(final_class, final_probs)],
+        cdict=cls2clr,
+    )
+
+    file_name = os.path.split(f)[1]
+    out_file_name = os.path.join(FLAGS.out_dir, 'out_' + file_name)
+    cv2.imwrite(out_file_name, im)
+    print('Image detection output saved to {}'.format(out_file_name))
+
+
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Evaluate squeezeDet keras checkpoints after each epoch on validation set.')
+    parser.add_argument("--model", help="Which model should use", default="mobile")
+    parser.add_argument("--weights", help="weights to load")
+    parser.add_argument("--image", help="Image path to predict")
+
+
+    args = parser.parse_args()
+    image_demo(args.model, args.weights, args.image)

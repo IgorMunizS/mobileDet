@@ -8,6 +8,7 @@
 
 from main.model.squeezeDet import SqueezeDet
 from main.model.mobileDet import MobileDet
+from main.model.cmuDet import CMUDet
 from main.model.dataGenerator import generator_from_data_path
 import keras.backend as K
 from keras import optimizers
@@ -24,6 +25,7 @@ from main.config.create_config import load_dict
 
 #global variables can be set by optional arguments
 #TODO: Makes proper variables in train() instead of global arguments.
+backbone = "mobile"
 img_file = "img_train.txt"
 gt_file = "gt_train.txt"
 log_dir_name = './log'
@@ -128,9 +130,13 @@ def train():
     sess = tf.Session(config=config)
     K.set_session(sess)
 
-
-    #instantiate model
-    squeeze = MobileDet(cfg)
+    # instantiate model
+    if backbone == "mobile":
+        squeeze = MobileDet(cfg)
+    elif backbone == "cmu":
+        squeeze = CMUDet(cfg)
+    elif backbone == "squeeze":
+        squeeze = SqueezeDet(cfg)
 
 
     #callbacks
@@ -266,6 +272,7 @@ if __name__ == "__main__":
 
     #parse arguments
     parser = argparse.ArgumentParser(description='Train squeezeDet model.')
+    parser.add_argument("--model", help="Which backbone model to train")
     parser.add_argument("--steps",  type=int, help="steps per epoch. DEFAULT: #imgs/ batch size")
     parser.add_argument("--epochs", type=int, help="number of epochs. DEFAULT: 100")
     parser.add_argument("--optimizer",  help="Which optimizer to use. DEFAULT: SGD with Momentum and lr decay OPTIONS: SGD, ADAM")
@@ -285,6 +292,8 @@ if __name__ == "__main__":
 
 
     #set global variables
+    if args.model is not None:
+        backbone = args.model
     if args.img is not None:
         img_file = args.img
     if args.gt is not None:
