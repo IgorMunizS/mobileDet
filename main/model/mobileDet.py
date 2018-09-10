@@ -20,7 +20,7 @@ from keras import layers
 # class that wraps config and model
 class MobileDet():
     # initialize model from config file
-    def __init__(self, config):
+    def __init__(self, config, freeze_backbone=False):
         """Init of SqueezeDet Class
 
         Arguments:
@@ -29,6 +29,7 @@ class MobileDet():
 
         # hyperparameter config file
         self.config = config
+        self.freeze_backbone = freeze_backbone
         # create Keras model
         self.model = self._create_model()
 
@@ -57,7 +58,14 @@ class MobileDet():
         x = self._depthwise_conv_block(x, 512, alpha, depth_multiplier, block_id=10)
         x = self._depthwise_conv_block(x, 512, alpha, depth_multiplier, block_id=11)
 
-        dropout11 = Dropout(rate=self.config.KEEP_PROB, name='drop11')(x)
+        base_model = Model(inputs=input_layer, outputs=x)
+        if self.freeze_backbone:
+            for layer in base_model.layers:
+                layer.trainable = False
+
+
+
+        dropout11 = Dropout(rate=self.config.KEEP_PROB, name='drop11')(base_model.output)
 
         # compute the number of output nodes from number of anchors, classes, confidence score and bounding box corners
         num_output = self.config.ANCHOR_PER_GRID * (self.config.CLASSES + 1 + 4)

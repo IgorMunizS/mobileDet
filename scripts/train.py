@@ -26,6 +26,7 @@ from main.config.create_config import load_dict
 #global variables can be set by optional arguments
 #TODO: Makes proper variables in train() instead of global arguments.
 backbone = "mobile"
+freeze_backbone = False
 img_file = "img_train.txt"
 gt_file = "gt_train.txt"
 log_dir_name = './log'
@@ -132,9 +133,9 @@ def train():
 
     # instantiate model
     if backbone == "mobile":
-        squeeze = MobileDet(cfg)
+        squeeze = MobileDet(cfg, freeze_backbone)
     elif backbone == "cmu":
-        squeeze = CMUDet(cfg)
+        squeeze = CMUDet(cfg, freeze_backbone)
     elif backbone == "squeeze":
         squeeze = SqueezeDet(cfg)
 
@@ -287,6 +288,8 @@ if __name__ == "__main__":
     parser.add_argument("--reducelr", type=bool, help="Add ReduceLrOnPlateu callback to training. DEFAULT: True")
     parser.add_argument("--verbose", type=bool,  help="Prints additional information. DEFAULT: False")
     parser.add_argument("--config",   help="Dictionary of all the hyperparameters. DEFAULT: squeeze.config")
+    parser.add_argument("--freezebackbone", type=bool, help="Option to freeze backbone layers during the training. DEFAULT: False")
+
 
     args = parser.parse_args()
 
@@ -320,5 +323,7 @@ if __name__ == "__main__":
         VERBOSE=args.verbose
     if args.config is not None:
         CONFIG = args.config
+    if args.freezebackbone is not None:
+        freeze_backbone = args.freezebackbone
 
     train()
