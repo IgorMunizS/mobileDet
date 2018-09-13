@@ -85,7 +85,12 @@ class CMUDet():
             for layer in base_model.layers:
                 layer.trainable = False
 
-        dropout11 = Dropout(rate=self.config.KEEP_PROB, name='drop11')(base_model.output)
+        # Additional layers for model acc increasing
+
+        x = self.conv(base_model.output, 128, 3, "conv5_1", (weight_decay, 0))
+        x = self.conv(x, 128, 3, "conv5_1", (weight_decay, 0))
+
+        dropout11 = Dropout(rate=self.config.KEEP_PROB, name='drop11')(x)
 
         # compute the number of output nodes from number of anchors, classes, confidence score and bounding box corners
         num_output = self.config.ANCHOR_PER_GRID * (self.config.CLASSES + 1 + 4)
