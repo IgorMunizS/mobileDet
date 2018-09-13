@@ -215,7 +215,7 @@ def train():
         """
     if checkpoint_file != "none":
 
-        squeeze.model.load_weights(checkpoint_file)
+        squeeze.model.load_weights(checkpoint_file, by_name=True)
 
     #create train generator
     train_generator = generator_from_data_path(img_names, gt_names, config=cfg)
