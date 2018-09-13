@@ -41,14 +41,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="demo" value="261" />
-          <entry key="py" value="1568" />
-          <entry key="txt" value="277" />
+          <entry key="py" value="1580" />
+          <entry key="txt" value="329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="277" />
-          <entry key="Python" value="1829" />
+          <entry key="PLAIN_TEXT" value="329" />
+          <entry key="Python" value="1841" />
         </counts>
       </usages-collector>
     </session>
@@ -70,11 +70,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/model/cmuDet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-238">
-              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="527">
+              <caret line="97" column="23" lean-forward="true" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
               <folding>
                 <element signature="e#161#191#0" expanded="true" />
-                <marker date="1536799883751" expanded="true" signature="4656:4663" ph="..." />
+                <marker date="1536801959259" expanded="true" signature="4655:4662" ph="..." />
               </folding>
             </state>
           </provider>
@@ -95,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="226" column="63" selection-start-line="226" selection-start-column="63" selection-end-line="226" selection-end-column="96" />
+            <state relative-caret-position="598">
+              <caret line="219" column="27" lean-forward="true" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
               <folding>
                 <element signature="e#156#200#0" expanded="true" />
               </folding>
@@ -391,7 +391,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536595453092</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added more layers to cmu det">
+      <created>1536799966459</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1536799966459</updated>
+    </task>
+    <task id="LOCAL-00014" summary="set load weights by name">
+      <created>1536800205284</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1536800205284</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -431,7 +445,9 @@
     <MESSAGE value="add cmu model backbone" />
     <MESSAGE value="change checkpoint init file" />
     <MESSAGE value="add option to freeze backbone in training step" />
-    <option name="LAST_COMMIT_MESSAGE" value="add option to freeze backbone in training step" />
+    <MESSAGE value="added more layers to cmu det" />
+    <MESSAGE value="set load weights by name" />
+    <option name="LAST_COMMIT_MESSAGE" value="set load weights by name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -534,8 +550,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="226" column="63" selection-start-line="226" selection-start-column="63" selection-end-line="226" selection-end-column="96" />
+        <state relative-caret-position="598">
+          <caret line="219" column="27" lean-forward="true" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
           <folding>
             <element signature="e#156#200#0" expanded="true" />
           </folding>
@@ -544,11 +560,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/model/cmuDet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="527">
+          <caret line="97" column="23" lean-forward="true" selection-start-line="97" selection-start-column="23" selection-end-line="97" selection-end-column="23" />
           <folding>
             <element signature="e#161#191#0" expanded="true" />
-            <marker date="1536799883751" expanded="true" signature="4656:4663" ph="..." />
+            <marker date="1536801959259" expanded="true" signature="4655:4662" ph="..." />
           </folding>
         </state>
       </provider>

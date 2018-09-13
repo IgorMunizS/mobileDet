@@ -88,7 +88,7 @@ class CMUDet():
         # Additional layers for model acc increasing
 
         x = self.conv(base_model.output, 128, 3, "conv5_1", (weight_decay, 0))
-        x = self.conv(x, 128, 3, "conv5_1", (weight_decay, 0))
+        x = self.conv(x, 128, 3, "conv5_2", (weight_decay, 0))
 
         dropout11 = Dropout(rate=self.config.KEEP_PROB, name='drop11')(x)
 
@@ -96,7 +96,7 @@ class CMUDet():
         num_output = self.config.ANCHOR_PER_GRID * (self.config.CLASSES + 1 + 4)
 
         preds = Conv2D(
-            name='conv12', filters=num_output, kernel_size=(3, 3), strides=(1, 1), activation=None, padding="SAME",
+            name='conv6', filters=num_output, kernel_size=(3, 3), strides=(1, 1), activation=None, padding="SAME",
             use_bias=True, kernel_initializer=TruncatedNormal(stddev=0.001),
             kernel_regularizer=l2(self.config.WEIGHT_DECAY))(dropout11)
 
