@@ -185,8 +185,8 @@ def read_image_and_gt(img_files, gt_files, config):
 
 
         #scale boxes
-        bboxes_per_file[0::2] = bboxes_per_file[0::2] * x_scale
-        bboxes_per_file[1::2] = bboxes_per_file[1::2] * y_scale
+        bboxes_per_file[:, 0::2] = bboxes_per_file[:, 0::2] * x_scale
+        bboxes_per_file[:, 1::2] = bboxes_per_file[:, 1::2] * y_scale
 
 
         bboxes.append(bboxes_per_file)
@@ -459,8 +459,8 @@ def read_image_and_gt_with_original(img_files, gt_files, config):
 
 
         #scale boxes
-        bboxes_per_file[0::2] = bboxes_per_file[0::2] * x_scale
-        bboxes_per_file[1::2] = bboxes_per_file[1::2] * y_scale
+        bboxes_per_file[:, 0::2] = bboxes_per_file[:, 0::2] * x_scale
+        bboxes_per_file[:, 1::2] = bboxes_per_file[:, 1::2] * y_scale
 
 
         bboxes.append(bboxes_per_file)
