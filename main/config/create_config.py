@@ -13,7 +13,7 @@ def squeezeDet_config(name):
     cfg = edict()
 
     #we only care about these, others are omiited
-    cfg.CLASS_NAMES = ['cyclist', 'pedestrian', 'car']
+    cfg.CLASS_NAMES = ['pedestrian']
 
     # number of categories to classify
     cfg.CLASSES = len(cfg.CLASS_NAMES)
